@@ -5,7 +5,6 @@ public class Election {
     private int inflationValue;
     private int riggedForCandidate;
     private boolean rigging;
-    // Candidates
     private Democrat democrat;
     private Republican republican;
     private Libertarian libertarian;
@@ -36,35 +35,45 @@ public class Election {
      *          3 Communist.
      * @param voteForCandidate the specific candidate that the vote is intended for.
      */
-    private void ballotReader(int voteForCandidate) {
+    public void ballotReader(int voteForCandidate) {
         int riggedVoteCount = calcRiggedVote();
-        if (voteForCandidate == 0) {
-            if (rigging) {
-                democrat.addVote(riggedVoteCount);
-            } else {
-                democrat.addVote();
-            }
-        } else  if (voteForCandidate == 1){
-            if (rigging) {
-                republican.addVote(riggedVoteCount);
-            } else {
-                republican.addVote();
-            }
-        } else  if (voteForCandidate == 2){
-            if (rigging) {
-                libertarian.addVote(riggedVoteCount);
-            } else {
-                libertarian.addVote();
-            }
-        } else  if (voteForCandidate == 3){
-            if (rigging) {
-                green.addVote(riggedVoteCount);
-            } else {
-                green.addVote();
-            }
-        } else {
-            System.out.println("ERROR: Vote Count value invalid");
+        switch (voteForCandidate) {
+            case 0:
+                if (rigging) {
+                    democrat.addVote(riggedVoteCount);
+                } else {
+                    democrat.addVote();
+                }
+                break;
+            case 1:
+                if (rigging) {
+                    republican.addVote(riggedVoteCount);
+                } else {
+                    republican.addVote();
+                }
+                break;
+            case 2:
+                if (rigging) {
+                    libertarian.addVote(riggedVoteCount);
+                } else {
+                    libertarian.addVote();
+                }
+                break;
+            case 3:
+                if (rigging) {
+                    green.addVote(riggedVoteCount);
+                } else {
+                    green.addVote();
+                }
+                break;
+            default:
+                System.out.println("ERROR: Vote Count value invalid");
+                break;
         }
+    }
+
+    public void declareWinner() {
+        // TODO: create method for declaring winner and initiating the boolean for the specific candidate.
     }
 
     private int calcRiggedVote() {
